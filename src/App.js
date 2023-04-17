@@ -23,6 +23,7 @@ function App() {
   } = useWhisper({
     apiKey: process.env.REACT_APP_OPENAI_API_TOKEN,
     timeSlice: 1_000, // 1 second
+    //removeSilence: true,
     whisperConfig: {
       language: 'en',
     },
@@ -38,11 +39,11 @@ function App() {
       const scriptProcessor = audioContext.createScriptProcessor(2048, 1, 1);
   
       analyser.smoothingTimeConstant = 0.8;
-      analyser.fftSize = 1024;
+      analyser.fftSize = 1024; //see what this means . gpt said to put 32 
   
       microphone.connect(analyser);
-      analyser.connect(scriptProcessor);
-      scriptProcessor.connect(audioContext.destination);
+      //analyser.connect(scriptProcessor);
+      //scriptProcessor.connect(audioContext.destination);
       scriptProcessor.onaudioprocess = function() {
         const array = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteFrequencyData(array);
@@ -64,12 +65,27 @@ function App() {
       // console.error(err);
     });
 
+    //if using streaming
+    //<p>Transcribed Text: {transcript.text}</p>
+
+//     <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+//   <p style={{ textAlign: "center" }}>{transcribing || speaking ? "Loading" : transcript.text}</p>
+// </div>
+
+
   return (
     <div>
-      <p>Recording: {recording ? "True" : "False"}</p>
-      <p>Speaking: {speaking ? "True" : "False"}</p>
-      <p>Transcribing: {transcribing ? "True" : "False"}</p>
-      <p>Transcribed Text: {transcript.text}</p>
+
+      <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", 
+      fontSize: "10vw", marginTop: "-0.08em" }}>
+      <p>{recording ? "Recording..." : (transcribing ? "Loading..." : transcript.text)}</p>
+      </div>
+
+      <p>Recording: {recording ? "True " : "False "} 
+      Speaking: {speaking ? "True " : "False "}
+      Transcribing: {transcribing ? "True " : "False "}
+      </p>
+      
       <button onClick={() => startRecording()}>Start</button>
       <button onClick={() => pauseRecording()}>Pause</button>
       <button onClick={() => stopRecording()}>Stop</button>
