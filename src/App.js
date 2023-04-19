@@ -77,7 +77,7 @@ function App() {
     <div>
 
       <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", 
-      fontSize: "10vw", marginTop: "-0.08em" }}>
+      fontSize: "14vw", marginTop: "-0.08em", fontFamily: "crystaltypeVF", lineHeight: "88%" }}>
       <p>{recording ? "Recording..." : (transcribing ? "Loading..." : transcript.text)}</p>
       </div>
 
