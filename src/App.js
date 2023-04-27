@@ -50,14 +50,6 @@ function App() {
         const arraySum = array.reduce((a, value) => a + value, 0);
         const volume = arraySum / array.length;
 
-        // if (volume > 20) {
-        //   startRecording for 5 seconds
-        //   if volume > 20
-        //   continue recording
-        // } else {
-        //   stopRecording();
-        // }
-
         // console.log("Volume " + Math.round(volume));
       };
     })
@@ -68,16 +60,32 @@ function App() {
     //if using streaming
     //<p>Transcribed Text: {transcript.text}</p>
 
-//     <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-//   <p style={{ textAlign: "center" }}>{transcribing || speaking ? "Loading" : transcript.text}</p>
-// </div>
+    const startAndStopRecording = () => {
+      // start recording
+      startRecording();
+  
+      // stop recording after 5 seconds
+      setTimeout(() => {
+        stopRecording();
+      }, 5000);
+    };
+  
+    // call startAndStopRecording every 5 seconds
+    setInterval(() => {
+      startAndStopRecording();
+    }, 5000);
+
+    // <button onClick={() => startRecording()}>Start</button>
+    // <button onClick={() => pauseRecording()}>Pause</button>
+    // <button onClick={() => stopRecording()}>Stop</button>
+    // <button onClick={() => startAndStopRecording()}>Start</button>
 
 
   return (
     <div>
 
       <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", 
-      fontSize: "14vw", marginTop: "-0.08em", fontFamily: "crystaltypeVF", lineHeight: "88%" }}>
+      fontSize: "14vw", marginTop: "-0.08em", fontFamily: "CrystalTracedVF", lineHeight: "88%" }}>
       <p>{recording ? "Recording..." : (transcribing ? "Loading..." : transcript.text)}</p>
       </div>
 
@@ -89,6 +97,7 @@ function App() {
       <button onClick={() => startRecording()}>Start</button>
       <button onClick={() => pauseRecording()}>Pause</button>
       <button onClick={() => stopRecording()}>Stop</button>
+      <button onClick={() => startAndStopRecording()}>Start loop</button>
     </div>
   )
 }
