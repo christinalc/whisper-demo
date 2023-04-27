@@ -62,7 +62,7 @@ async function startAndStopRecording() {
 
       <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", 
       fontSize: "14vw", marginTop: "-0.08em", fontFamily: "CrystalTracedVF", lineHeight: "88%" }}>
-      <p>{recording ? "Recording..." : (transcribing ? "Loading..." : transcript.text)}</p>
+      <p>{recording ? "Listening..." : (transcribing ? "Loading..." : transcript.text)}</p>
       </div>
 
       {/*<p>Recording: {recording ? "True " : "False "} 
