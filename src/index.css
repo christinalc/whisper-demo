@@ -3,8 +3,14 @@
   src: url('./fonts/CrystalTracedVF.ttf') format('truetype');
 }
 
+.btn {
+  border: none;
+  background-color: #FFFFFF; 
+  font-family: sans-serif; 
+}
+
 .words {
-  font-family: 'crystaltypeVF'; 
+  font-family: 'CrystalTracedVF'; 
   height: '100vh';
   display: 'flex';
   justify-content: 'center';

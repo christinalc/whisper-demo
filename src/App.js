@@ -22,64 +22,40 @@ function App() {
     stopRecording,
   } = useWhisper({
     apiKey: process.env.REACT_APP_OPENAI_API_TOKEN,
-    timeSlice: 1_000, // 1 second
-    //removeSilence: true,
+    removeSilence: true,
     whisperConfig: {
       language: 'en',
     },
-  })
+  });
 
-  navigator.mediaDevices.getUserMedia({
-    audio: true,
-  })
-    .then(function(stream) {
-      const audioContext = new AudioContext();
-      const analyser = audioContext.createAnalyser();
-      const microphone = audioContext.createMediaStreamSource(stream);
-      const scriptProcessor = audioContext.createScriptProcessor(2048, 1, 1);
-  
-      analyser.smoothingTimeConstant = 0.8;
-      analyser.fftSize = 1024; //see what this means . gpt said to put 32 
-  
-      microphone.connect(analyser);
-      //analyser.connect(scriptProcessor);
-      //scriptProcessor.connect(audioContext.destination);
-      scriptProcessor.onaudioprocess = function() {
-        const array = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteFrequencyData(array);
-        const arraySum = array.reduce((a, value) => a + value, 0);
-        const volume = arraySum / array.length;
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-        // console.log("Volume " + Math.round(volume));
-      };
-    })
-    .catch(function(err) {
-      // console.error(err);
-    });
+async function startAndStopRecording() {
+  while (true) {
+    console.log("Starting with loop");
+    startRecording();
+    await sleep(5000);
+    stopRecording();
+    await sleep(5000);
+    console.log("Done with loop");
+  }
+}
 
-    //if using streaming
-    //<p>Transcribed Text: {transcript.text}</p>
+  // // idk about this
+  // const startAndStopRecording = () => {
+  //   // start recording
+  //   startRecording();
 
-    const startAndStopRecording = () => {
-      // start recording
-      startRecording();
-  
-      // stop recording after 5 seconds
-      setTimeout(() => {
-        stopRecording();
-      }, 5000);
-    };
-  
-    // call startAndStopRecording every 5 seconds
-    setInterval(() => {
-      startAndStopRecording();
-    }, 5000);
+  //   // stop recording after 5 seconds
+  //   setTimeout(() => {
+  //     stopRecording();
+  //   }, 5000);
+  // };
 
-    // <button onClick={() => startRecording()}>Start</button>
-    // <button onClick={() => pauseRecording()}>Pause</button>
-    // <button onClick={() => stopRecording()}>Stop</button>
-    // <button onClick={() => startAndStopRecording()}>Start</button>
-
+  // // call startAndStopRecording every 5 seconds
+  // setInterval(() => {
+  //   startAndStopRecording();
+  // }, 5000);
 
   return (
     <div>
@@ -89,15 +65,15 @@ function App() {
       <p>{recording ? "Recording..." : (transcribing ? "Loading..." : transcript.text)}</p>
       </div>
 
-      <p>Recording: {recording ? "True " : "False "} 
+      {/*<p>Recording: {recording ? "True " : "False "} 
       Speaking: {speaking ? "True " : "False "}
       Transcribing: {transcribing ? "True " : "False "}
-      </p>
+      </p> */}
       
-      <button onClick={() => startRecording()}>Start</button>
+      {/* <button onClick={() => startRecording()}>Start</button>
       <button onClick={() => pauseRecording()}>Pause</button>
-      <button onClick={() => stopRecording()}>Stop</button>
-      <button onClick={() => startAndStopRecording()}>Start loop</button>
+      <button onClick={() => stopRecording()}>Stop</button> */}
+      <button className="btn" onClick={() => startAndStopRecording()}>2023</button>
     </div>
   )
 }
