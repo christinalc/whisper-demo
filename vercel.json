@@ -14,7 +14,25 @@
         ]
       },
       {
+        "source": "/node_modules/@ffmpeg/core/dist/ffmpeg-core.wasm",
+        "headers": [
+        {
+            "key": "Content-Type",
+            "value": "application/wasm"
+        }
+      ]
+      },
+      {
         "source": "/node_modules/source-map/lib/mappings.wasm",
+        "headers": [
+        {
+            "key": "Content-Type",
+            "value": "application/wasm"
+        }
+      ]
+      },
+      {
+        "source": "/node_modules/workbox-build/node_modules/source-map/lib/mappings.wasm",
         "headers": [
         {
             "key": "Content-Type",
