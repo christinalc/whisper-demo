@@ -12,6 +12,15 @@
             "value": "same-origin"
           }
         ]
+      },
+      {
+        "source": "/.*\\.wasm",
+        "headers": [
+        {
+            "key": "Content-Type",
+            "value": "application/wasm"
+        }
+      ]
       }
     ]
   }
