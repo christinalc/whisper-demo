@@ -14,7 +14,7 @@
         ]
       },
       {
-        "source": "/node_modules/@ffmpeg/core/dist/ffmpeg-core.wasm",
+        "source": "/node_modules/source-map/lib/mappings.wasm",
         "headers": [
         {
             "key": "Content-Type",
