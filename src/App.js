@@ -26,6 +26,7 @@ function App() {
     whisperConfig: {
       language: 'en',
     },
+    autoTranscribe: true, 
   });
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -35,7 +36,9 @@ async function startAndStopRecording() {
     console.log("Starting with loop");
     startRecording();
     await sleep(5000);
+    console.log("stopping recording");
     stopRecording();
+    console.log("stopped recording");
     await sleep(5000);
     console.log("Done with loop");
   }
