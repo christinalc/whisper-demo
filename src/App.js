@@ -22,7 +22,7 @@ function App() {
     stopRecording,
   } = useWhisper({
     apiKey: process.env.REACT_APP_OPENAI_API_TOKEN,
-    //removeSilence: true,
+    removeSilence: true,
     whisperConfig: {
       language: 'en',
     },
